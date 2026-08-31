@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Neo-Brutalist Cyberpunk Form</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --grid-color: #222225;
+            --form-bg: #131316;
+            --primary: #ff0055;
+            --secondary: #00f0ff;
+            --success: #39ff14;
+            --text: #ffffff;
+            --border: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(var(--grid-color) 2px, transparent 2px),
+                              linear-gradient(90deg, var(--grid-color) 2px, transparent 2px);
+            background-size: 40px 40px;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Particle Canvas Layer */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Dark Mode Theme Control Toggle */
+        .theme-panel {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 100;
+        }
+
+        .toggle-btn {
+            background: var(--form-bg);
+            color: var(--text);
+            border: 3px solid var(--border);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 var(--border);
+        }
+
+        .toggle-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--border);
+        }
+
+        /* Custom Alert Notification */
+        .extreme-alert {
+            position: fixed;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-1deg);
+            background: var(--primary);
+            color: white;
+            border: 6px solid var(--border);
+            padding: 25px 40px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            box-shadow: 10px 10px 0 var(--border);
+            z-index: 1000;
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            letter-spacing: 1px;
+        }
+
+        .extreme-alert.show {
+            top: 40px;
+        }
+
+        /* Core Form Layout Container */
+        .extreme-container {
+            background: var(--form-bg);
+            border: 8px solid var(--border);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 20px 20px 0px var(--border);
+            transform: rotate(-1deg);
+            transition: transform 0.2s ease, background 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .extreme-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            color: var(--secondary);
+            text-shadow: 5px 5px 0 var(--primary);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-align: center;
+            -webkit-text-stroke: 2px var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: var(--secondary);
+            color: black;
+            padding: 6px 12px;
+            display: inline-block;
+            border: 4px solid var(--border);
+            box-shadow: 4px 4px 0 var(--border);
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.4rem;
+            border: 4px solid var(--border);
+            background: #1f1f24;
+            color: #ffffff;
+            font-weight: bold;
+            outline: none;
+            box-shadow: inset 4px 4px 0 rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+        }
+
+        input:focus {
+            background: #2a2a32;
+            border-color: var(--secondary);
+            box-shadow: 8px 8px 0 var(--primary);
+            transform: translate(-4px, -4px);
+        }
+
+        input.invalid {
+            border-color: var(--primary) !important;
+            background: #3a101c !important;
+            box-shadow: 8px 8px 0 var(--border) !important;
+        }
+
+        .range-hint {
+            color: #88888e;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-box {
+            background: var(--primary);
+            color: white;
+            font-size: 2.8rem;
+            text-align: center;
+            padding: 18px;
+            border: 6px solid var(--border);
+            box-shadow: 8px 8px 0 var(--border);
+            margin-top: 35px;
+            position: relative;
+            animation: pulse 1.5s infinite alternate;
+            word-wrap: break-word;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 18px;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border: 4px solid var(--border);
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 6px 6px 0 var(--border);
+        }
+
+        button[type="submit"] {
+            background: var(--success);
+            color: black;
+        }
+
+        button[type="button"] {
+            background: #44444a;
+            color: white;
+        }
+
+        button:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 var(--border);
+        }
+
+        button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0 var(--border);
+        }
+
+        /* Light Mode Structural Overrides */
+        body.light-theme {
+            --bg-color: #ffde4d;
+            --grid-color: #e0c23a;
+            --form-bg: #ffffff;
+            --text: #000000;
+            --primary: #ff4a4a;
+            --secondary: #3d52d5;
+        }
+        body.light-theme input {
+            background: #f0f0f0;
+            color: #000000;
+            box-shadow: inset 4px 4px 0 rgba(0,0,0,0.1);
+        }
+        body.light-theme input:focus {
+            background: #ffffff;
+        }
+        body.light-theme label {
+            color: white;
+        }
+        body.light-theme button[type="button"] {
+            background: #cccccc;
+            color: black;
+        }
+        body.light-theme input.invalid {
+            background: #ffe6e6 !important;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.04); }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="theme-panel">
+        <button class="toggle-btn" id="themeToggle" type="button">LIGHT MODE</button>
+    </div>
+
+    <div id="customAlert" class="extreme-alert">ERROR DETECTED!</div>
+
+    <div class="extreme-container">
+        <h1>CORE MATRIX</h1>
+        
+        <form id="extremeForm" novalidate>
+            <div class="form-group">
+                <label for="input1">FACTOR X</label>
+                <input type="number" id="input1" value="5" placeholder="0-100" required>
+                <div class="range-hint">ALLOWED RANGE: 0 TO 100</div>
+            </div>
+
+            <div class="form-group">
+                <label for="input2">FACTOR Y</label>
+                <input type="number" id="input2" value="1" placeholder="0-100" required>
+                <div class="range-hint">ALLOWED RANGE: 0 TO 100</div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="input3" placeholder="EXTRA TEXT FIELD..." required>
+            </div>
+
+            <p class="result-box" id="result">5 X 1 = 5</p>
+
+            <div class="btn-container">
+                <button type="submit">SUBMIT</button>
+                <button type="button" id="resetBtn">RESET</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const body = document.body;
+        const themeToggle = document.getElementById('themeToggle');
+        const form = document.getElementById('extremeForm');
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const input3 = document.getElementById('input3');
+        const result = document.getElementById('result');
+        const resetBtn = document.getElementById('resetBtn');
+        const customAlert = document.getElementById('customAlert');
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Particle System Infrastructure
+        let particles = [];
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 8 + 4;
