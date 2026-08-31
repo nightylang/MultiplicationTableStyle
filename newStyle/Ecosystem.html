@@ -440,9 +440,97 @@ SUBSECTION: MOBILE ASSETS MARKETPLACE
 </head>
 <body>
 
-  
+  <body>
+  <!-- Navigation Header Bar -->
+  <nav class="nav-bar">
+    <div style="font-weight:700; font-size:1.5rem;">NaThana</div>
+    <ul class="menu-list">
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Service</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Bank</a></li>
+    </ul>
+    <div>
+      <button onclick="document.body.classList.add('drawer-active')">Cart (0)</button>
+      <button id="themeSwitch">Switch Mode</button>
+    </div>
+  </nav>
+
+  <!-- Core Ecosystem Segments -->
+  <main style="padding: 140px 40px 40px 40px;">
+    <section class="glass-card">
+      <h2>NaThana Central Banking Mesh</h2>
+      <p>Secure corporate banking liquidity frameworks and encrypted data nodes.</p>
+    </section>
+
+    <section class="glass-card">
+      <h2>Mobile Device Marketplace</h2>
+      <p>Procure premium high-tier dynamic smartphone fleet hardware configurations.</p>
+    </section>
+
+    <section class="glass-card">
+      <h2>Premium Property Rentals</h2>
+      <p>Bespoke luxury residential contract escrow lease allocations.</p>
+    </section>
+  </main>
+
+  <!-- Sliding Transaction Ledger Box Drawer -->
+  <div class="cart-drawer">
+    <h3>Ecosystem Ledger</h3>
+    <p>No transaction parameters queued.</p>
+    <button onclick="document.body.classList.remove('drawer-active')">Close</button>
+  </div>
+
   <script>
-    /* --------------------------------------------------------------------------THEME ARCHITECTURE CONTROLLER-------------------------------------------------------------------------- */const themeButton = document.getElementById('themeSwitch');const rootElement = document.documentElement;themeButton.addEventListener('click', () => {const activeTheme = rootElement.getAttribute('data-theme');if (activeTheme === 'dark') {rootElement.setAttribute('data-theme', 'dark-red');} else {rootElement.setAttribute('data-theme', 'dark');}});/* --------------------------------------------------------------------------HAND-CRAFTED E-COMMERCE CART DATA ENGINE-------------------------------------------------------------------------- */const cartSystem = {items: [],appendItem(title, price, type) {this.items.push({ id: Date.now() + Math.random(), title, price, type });this.render();document.body.classList.add('drawer-active');},removeItem(id) {this.items = this.items.filter(item => item.id !== id);this.render();},render() {const listContainer = document.getElementById('drawerItemsList');const countBadge = document.getElementById('cartCount');const totalContainer = document.getElementById('cartTotal');countBadge.textContent = this.items.length;if (this.items.length === 0) {listContainer.innerHTML = 'No transaction parameters queued.';totalContainer.textContent = '$0.00';return;}let calculatedSum = 0;listContainer.innerHTML = '';this.items.forEach(item => {calculatedSum += item.price;const node = document.createElement('div');node.className = 'cart-item-node';node.innerHTML = <div class="item-node-meta"> <span>${item.type}</span> <h5>${item.title}</h5> <div style="font-weight:600; font-size:0.95rem; margin-top:4px;">\$${item.price.toLocaleString()}</div> </div> <button class="remove-node-item" onclick="cartSystem.removeItem(${item.id})">Remove</button>;listContainer.appendChild(node);});totalContainer.textContent = \$${calculatedSum.toLocaleString()};}};/* Drawer Visibility Event Toggles */document.getElementById('openCart').addEventListener('click', () => document.body.classList.add('drawer-active'));document.getElementById('closeCart').addEventListener('click', () => document.body.classList.remove('drawer-active'));document.getElementById('cartOverlay').addEventListener('click', () => document.body.classList.remove('drawer-active'));
+    /* --------------------------------------------------------------------------THEME ARCHITECTURE CONTROLLER-------------------------------------------------------------------------- */
+    const themeButton = document.getElementById('themeSwitch');
+    const rootElement = document.documentElement;
+    themeButton.addEventListener('click', () => {
+      const activeTheme = rootElement.getAttribute('data-theme');
+      if (activeTheme === 'dark') {
+        rootElement.setAttribute('data-theme', 'dark-red');
+      } 
+      else {
+        rootElement.setAttribute('data-theme', 'dark');
+      }
+    });
+    /* --------------------------------------------------------------------------HAND-CRAFTED E-COMMERCE CART DATA ENGINE-------------------------------------------------------------------------- */
+    const cartSystem = {
+      items: [],appendItem(title, price, type) {
+        this.items.push({ id: Date.now() + Math.random(), title, price, type });
+        this.render();document.body.classList.add('drawer-active');},
+      removeItem(id) {
+        this.items = this.items.filter(item => item.id !== id);
+        this.render();},render() {
+        const listContainer = document.getElementById('drawerItemsList');
+        const countBadge = document.getElementById('cartCount');
+        const totalContainer = document.getElementById('cartTotal');
+        countBadge.textContent = this.items.length;
+        if (this.items.length === 0) {
+          listContainer.innerHTML = 'No transaction parameters queued.';
+          totalContainer.textContent = '$0.00';
+          return;}
+        let calculatedSum = 0;
+        listContainer.innerHTML = '';
+        this.items.forEach(
+          item => {
+            calculatedSum += item.price;
+            const node = document.createElement('div');
+            node.className = 'cart-item-node';
+            node.innerHTML = 
+              <div class="item-node-meta"> 
+                <span>${item.type}</span> 
+                <h5>${item.title}</h5> 
+                <div style="font-weight:600; font-size:0.95rem; margin-top:4px;">\$${item.price.toLocaleString()}</div>
+              </div> 
+              <button class="remove-node-item" onclick="cartSystem.removeItem(${item.id})">Remove</button>;
+          listContainer.appendChild(node);});
+        totalContainer.textContent = \$${calculatedSum.toLocaleString()};
+        }};
+        /* Drawer Visibility Event Toggles */
+        document.getElementById('openCart').addEventListener('click', () => document.body.classList.add('drawer-active'));
+        document.getElementById('closeCart').addEventListener('click', () => document.body.classList.remove('drawer-active'));
+        document.getElementById('cartOverlay').addEventListener('click', () => document.body.classList.remove('drawer-active'));
     
   </script>
 </body>
