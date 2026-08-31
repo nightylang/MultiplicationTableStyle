@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Neo-Brutalist Form</title>
+    <style>
+        :root {
+            --bg-color: #ffde4d;
+            --form-bg: #ffffff;
+            --primary: #ff4a4a;
+            --secondary: #3d52d5;
+            --text: #000000;
+            --border: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(var(--border) 15%, transparent 16%), radial-gradient(var(--border) 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .extreme-container {
+            background: var(--form-bg);
+            border: 8px solid var(--border);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 20px 20px 0px var(--border);
+            transform: rotate(-1deg);
+            transition: transform 0.2s ease;
+        }
+
+        .extreme-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            color: var(--primary);
+            text-shadow: 4px 4px 0 var(--border);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            display: inline-block;
+            border: 4px solid var(--border);
+            box-shadow: 4px 4px 0 var(--border);
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 4px solid var(--border);
+            background: #f0f0f0;
+            font-weight: bold;
+            outline: none;
+            box-shadow: inset 4px 4px 0 rgba(0,0,0,0.1);
+            transition: all 0.1s ease;
+        }
+
+        input:focus {
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 8px 8px 0 var(--border);
+            transform: translate(-4px, -4px);
+        }
+
+        .result-box {
+            background: var(--primary);
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            padding: 15px;
+            border: 6px solid var(--border);
+            box-shadow: 8px 8px 0 var(--border);
+            margin-top: 35px;
+            position: relative;
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="extreme-container" id="card">
+        <h1>CORE MULTIPLIER</h1>
+        
+        <form>
+            <div class="form-group">
+                <label for="input1">FACTOR X</label>
+                <input type="number" id="input1" value="5" placeholder="ENTER VAL 1..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="input2">FACTOR Y</label>
+                <input type="number" id="input2" value="1" placeholder="ENTER VAL 2..." required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="input3" placeholder="EXTRA TEXT (NO INFLUENCE)...">
+            </div>
+
+            <p class="result-box" id="result">5 X 1 = 5</p>
+        </form>
+    </div>
+
+    <script>
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const input3 = document.getElementById('input3');
+        const result = document.getElementById('result');
+        const card = document.getElementById('card');
+
+        // Initialize Web Audio API
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        // 1. High synth pop sound for keystrokes
+        function playTypeSound() {
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'square'; // Brutalist lo-fi texture
+            osc.frequency.setValueAtTime(300 + Math.random() * 150, audioCtx.currentTime); // Slight variance
+            
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime); // Low volume so it isn't annoying
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05); // Quick decay
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.05);
+        }
+
+        // 2. Heavy analog synth drone for calculations
+        function playCalculateSound() {
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sawtooth'; // Aggressive industrial sound
+            osc.frequency.setValueAtTime(100, audioCtx.currentTime);
+            osc.frequency.linearRampToValueAtTime(180, audioCtx.currentTime + 0.15); // Rising pitch
+            
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.18);
+        }
+
+        // 3. Sub-bass thud for hovering the element container
+        function playHoverSound() {
+            initAudio();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'triangle'; // Deep smooth bass 
+            osc.frequency.setValueAtTime(70, audioCtx.currentTime);
+            
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.2);
+        }
+
+        // Calculation logic
+        function calculate() {
+            const val1 = parseFloat(input1.value) || 0;
+            const val2 = parseFloat(input2.value) || 0;
+            const product = val1 * val2;
+            result.textContent = `${val1} X ${val2} = ${product}`;
+            
+            playCalculateSound(); // Trigger calculation boom
+        }
+
+        // Add Event Listeners for interactive sounds
+        input1.addEventListener('input', calculate);
+        input2.addEventListener('input', calculate);
+        
+        // Typing sounds for all inputs
+        [input1, input2, input3].forEach(input => {
+            input.addEventListener('keydown', playTypeSound);
+        });
+
+        // Hover sound for the interface card container
+        card.addEventListener('mouseenter', playHoverSound);
+    </script>
+</body>
+</html>
