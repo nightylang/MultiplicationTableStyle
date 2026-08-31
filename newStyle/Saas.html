@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B SaaS Dark Mode Footer</title>
+  <title>B2B SaaS Dark Mode Footer with Ripple Intro</title>
   <style>
     /* Reset & Base Styles */
     * {
@@ -117,7 +117,9 @@
       color: #ffffff;
     }
 
-    /* Abstract Neon Blue Grid Geometric Accents */
+    /* ==========================================================================
+       ANIMATED NEON GRID SYSTEM (WITH ENTRY RIPPLE)
+       ========================================================================== */
     .footer-grid-accent {
       position: absolute;
       bottom: -40px;
@@ -127,7 +129,6 @@
       gap: 12px;
       opacity: 0.85;
       z-index: 1;
-      pointer-events: none;
     }
 
     .grid-cube {
@@ -135,16 +136,95 @@
       height: 45px;
       border-radius: 12px;
       background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.25));
+      cursor: pointer;
+      opacity: 0; /* Hidden initially for the animation intro */
+      
+      /* Standard interaction framework transitions */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  filter 0.4s ease, 
+                  opacity 0.4s ease;
+      
+      /* Combined Animations: 
+         1. introWave (executes once to animate entrance)
+         2. ambientGlow (loops forever for steady pulse) */
+      animation: introWave 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                 ambientGlow 6s ease-in-out infinite alternate;
     }
 
-    /* Staggered variation styling for an irregular layout */
+    /* Interactive Hovering States */
+    .grid-cube:hover {
+      transform: translateY(-8px) scale(1.12) !important;
+      filter: drop-shadow(0 0 25px rgba(96, 165, 250, 0.75)) brightness(1.25) !important;
+      opacity: 1 !important;
+      z-index: 10;
+    }
+
+    /* Color Grid Style Variations */
     .grid-cube.v1 { background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%); }
     .grid-cube.v2 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
-    .grid-cube.dim { opacity: 0.4; }
-    .grid-cube.hidden { visibility: hidden; }
+    .grid-cube.dim { opacity: 0.35; }
+    .grid-cube.hidden { 
+      visibility: hidden; 
+      pointer-events: none;
+      animation: none;
+    }
 
-    /* Responsive adjustments */
+    /* 
+       STAGGERED DELAYS FOR THE CASCADE WAVE EFFECT
+       Cubes pop into view row-by-row, left-to-right
+    */
+    .grid-cube:nth-child(1)  { animation-delay: 0.05s, 0.8s; }
+    .grid-cube:nth-child(2)  { animation-delay: 0.10s, 0.9s; }
+    .grid-cube:nth-child(3)  { animation-delay: 0.15s, 1.0s; }
+    .grid-cube:nth-child(4)  { animation-delay: 0.20s, 1.1s; }
+    .grid-cube:nth-child(5)  { animation-delay: 0.25s, 1.2s; }
+    .grid-cube:nth-child(6)  { animation-delay: 0.30s, 1.3s; }
+    .grid-cube:nth-child(7)  { animation-delay: 0.35s, 1.4s; }
+    .grid-cube:nth-child(8)  { animation-delay: 0.40s, 1.5s; }
+    
+    .grid-cube:nth-child(9)  { animation-delay: 0.20s, 1.1s; }
+    .grid-cube:nth-child(10) { animation-delay: 0.25s, 1.2s; }
+    .grid-cube:nth-child(11) { animation-delay: 0.30s, 1.3s; }
+    .grid-cube:nth-child(12) { animation-delay: 0.35s, 1.4s; }
+    .grid-cube:nth-child(13) { animation-delay: 0.40s, 1.5s; }
+    .grid-cube:nth-child(14) { animation-delay: 0.45s, 1.6s; }
+    .grid-cube:nth-child(15) { animation-delay: 0.50s, 1.7s; }
+    .grid-cube:nth-child(16) { animation-delay: 0.55s, 1.8s; }
+    
+    .grid-cube:nth-child(17) { animation-delay: 0.35s, 1.4s; }
+    .grid-cube:nth-child(18) { animation-delay: 0.40s, 1.5s; }
+    .grid-cube:nth-child(19) { animation-delay: 0.45s, 1.6s; }
+    .grid-cube:nth-child(20) { animation-delay: 0.50s, 1.7s; }
+    .grid-cube:nth-child(21) { animation-delay: 0.55s, 1.8s; }
+    .grid-cube:nth-child(22) { animation-delay: 0.60s, 1.9s; }
+    .grid-cube:nth-child(23) { animation-delay: 0.65s, 2.0s; }
+    .grid-cube:nth-child(24) { animation-delay: 0.70s, 2.1s; }
+
+    /* Animation Keyframes: Intro Scale & Reveal Fade */
+    @keyframes introWave {
+      0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.6);
+        filter: drop-shadow(0 0 0px rgba(59, 130, 246, 0));
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Animation Keyframes: Continuous Ambient Base Breathing Pulse */
+    @keyframes ambientGlow {
+      0% {
+        filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.15));
+      }
+      100% {
+        filter: drop-shadow(0 0 22px rgba(59, 130, 246, 0.45));
+      }
+    }
+
+    /* Responsive scaling */
     @media (max-width: 768px) {
       .footer-content {
         grid-template-columns: 1fr;
@@ -209,6 +289,7 @@
 
     <!-- Background Matrix Accent Grid -->
     <div class="footer-grid-accent">
+      <!-- Row 1 -->
       <div class="grid-cube v1"></div>
       <div class="grid-cube hidden"></div>
       <div class="grid-cube dim"></div>
@@ -218,6 +299,7 @@
       <div class="grid-cube v1"></div>
       <div class="grid-cube dim"></div>
 
+      <!-- Row 2 -->
       <div class="grid-cube hidden"></div>
       <div class="grid-cube v2"></div>
       <div class="grid-cube"></div>
@@ -227,6 +309,7 @@
       <div class="grid-cube"></div>
       <div class="grid-cube v2"></div>
 
+      <!-- Row 3 -->
       <div class="grid-cube dim"></div>
       <div class="grid-cube"></div>
       <div class="grid-cube hidden"></div>
