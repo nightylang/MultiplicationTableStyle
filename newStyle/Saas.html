@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B SaaS Dark Mode Footer with Ripple Intro</title>
+  <title>B2B SaaS Dark Mode Footer with Floating Drift Matrix</title>
   <style>
     /* Reset & Base Styles */
     * {
@@ -34,6 +34,298 @@
     .footer-content {
       max-width: 1200px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Brand/Company Column */
+    .footer-brand .brand-logo {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    /* Navigation Columns */
+    .footer-column h3 {
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-column ul li a {
+      color: #8f94a3;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-column ul li a:hover {
+      color: #3b82f6;
+    }
+
+    /* Bottom Legal Bar */
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 60px auto 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+      font-size: 0.8rem;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .legal-links a {
+      color: #646875;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .legal-links a:hover {
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       ANIMATED NEON GRID SYSTEM (WITH ENTRY RIPPLE & FLOATING DRIFT)
+       ========================================================================== */
+    .footer-grid-accent {
+      position: absolute;
+      bottom: -30px;
+      right: 5%;
+      display: grid;
+      grid-template-columns: repeat(8, 45px);
+      gap: 12px;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .grid-cube {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.25));
+      cursor: pointer;
+      opacity: 0;
+      
+      /* Standard interaction transforms */
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                  filter 0.4s ease, 
+                  opacity 0.4s ease;
+      
+      /* Combined Animations: 
+         1. introWave (Reveals once)
+         2. infiniteDrift (Loops complex floating paths indefinitely)
+         3. ambientGlow (Loops steady brightness shifts) */
+      animation: introWave 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                 infiniteDrift 8s ease-in-out infinite alternate,
+                 ambientGlow 5s ease-in-out infinite alternate;
+    }
+
+    /* Interactive Hovering States */
+    .grid-cube:hover {
+      transform: translateY(-12px) scale(1.15) !important;
+      filter: drop-shadow(0 0 30px rgba(96, 165, 250, 0.85)) brightness(1.3) !important;
+      opacity: 1 !important;
+      z-index: 10;
+    }
+
+    /* Color Grid Style Variations & Staggered Drift Offsets */
+    .grid-cube.v1 { 
+      background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%); 
+      animation-name: introWave, infiniteDriftAlt, ambientGlow;
+      animation-duration: 0.8s, 10s, 6s;
+    }
+    .grid-cube.v2 { 
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); 
+      animation-name: introWave, infiniteDriftDiag, ambientGlow;
+      animation-duration: 0.8s, 12s, 4s;
+    }
+    .grid-cube.dim { 
+      opacity: 0.35; 
+    }
+    .grid-cube.hidden { 
+      visibility: hidden; 
+      pointer-events: none;
+      animation: none;
+    }
+
+    /* Staggered Delay Timings for Multi-layered Flow */
+    .grid-cube:nth-child(1)  { animation-delay: 0.05s, 0.85s, 0.0s; }
+    .grid-cube:nth-child(2)  { animation-delay: 0.10s, 0.90s, 0.5s; }
+    .grid-cube:nth-child(3)  { animation-delay: 0.15s, 0.95s, 1.0s; }
+    .grid-cube:nth-child(4)  { animation-delay: 0.20s, 1.00s, 1.5s; }
+    .grid-cube:nth-child(5)  { animation-delay: 0.25s, 1.05s, 2.0s; }
+    .grid-cube:nth-child(6)  { animation-delay: 0.30s, 1.10s, 2.5s; }
+    .grid-cube:nth-child(7)  { animation-delay: 0.35s, 1.15s, 3.0s; }
+    .grid-cube:nth-child(8)  { animation-delay: 0.40s, 1.20s, 3.5s; }
+    
+    .grid-cube:nth-child(9)  { animation-delay: 0.20s, 1.00s, 0.2s; }
+    .grid-cube:nth-child(10) { animation-delay: 0.25s, 1.05s, 0.7s; }
+    .grid-cube:nth-child(11) { animation-delay: 0.30s, 1.10s, 1.2s; }
+    .grid-cube:nth-child(12) { animation-delay: 0.35s, 1.15s, 1.7s; }
+    .grid-cube:nth-child(13) { animation-delay: 0.40s, 1.20s, 2.2s; }
+    .grid-cube:nth-child(14) { animation-delay: 0.45s, 1.25s, 2.7s; }
+    .grid-cube:nth-child(15) { animation-delay: 0.50s, 1.30s, 3.2s; }
+    .grid-cube:nth-child(16) { animation-delay: 0.55s, 1.35s, 3.7s; }
+    
+    .grid-cube:nth-child(17) { animation-delay: 0.35s, 1.15s, 0.4s; }
+    .grid-cube:nth-child(18) { animation-delay: 0.40s, 1.20s, 0.9s; }
+    .grid-cube:nth-child(19) { animation-delay: 0.45s, 1.25s, 1.4s; }
+    .grid-cube:nth-child(20) { animation-delay: 0.50s, 1.30s, 1.9s; }
+    .grid-cube:nth-child(21) { animation-delay: 0.55s, 1.35s, 2.4s; }
+    .grid-cube:nth-child(22) { animation-delay: 0.60s, 1.40s, 2.9s; }
+    .grid-cube:nth-child(23) { animation-delay: 0.65s, 1.45s, 3.4s; }
+    .grid-cube:nth-child(24) { animation-delay: 0.70s, 1.50s, 3.9s; }
+
+    /* Intro Wave Animation Keyframes */
+    @keyframes introWave {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Floating Drift Animations Definitions */
+    @keyframes infiniteDrift {
+      0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) translateX(3px) rotate(1deg); }
+      100% { transform: translateY(4px) translateX(-2px) rotate(-1deg); }
+    }
+
+    @keyframes infiniteDriftAlt {
+      0% { transform: translateY(4px) translateX(-3px) rotate(-1deg); }
+      50% { transform: translateY(-6px) translateX(4px) rotate(2deg); }
+      100% { transform: translateY(-2px) translateX(1px) rotate(0deg); }
+    }
+
+    @keyframes infiniteDriftDiag {
+      0% { transform: translateY(-3px) translateX(-3px); }
+      50% { transform: translateY(5px) translateX(5px); }
+      100% { transform: translateY(-5px) translateX(2px); }
+    }
+
+    /* Ambient Pulsing Keyframe definition */
+    @keyframes ambientGlow {
+      0% { filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.15)); }
+      100% { filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.45)); }
+    }
+
+    /* Responsive scaling layout */
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .footer-grid-accent {
+        right: -10%;
+        transform: scale(0.7);
+        bottom: -60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Footer Component -->
+  <footer class="saas-footer">
+    
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="brand-logo">pave-style.</div>
+        <p>Real-time compensation platform automation driven by agentic data layers.</p>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Platform</h3>
+        <ul>
+          <li><a href="#">Market Pricing</a></li>
+          <li><a href="#">Team View</a></li>
+          <li><a href="#">Comp Planning</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Plans & Pricing</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">Our purpose</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Legal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Legal Copyright Info Block -->
+    <div class="footer-bottom">
+      <div>© 2026 Pave-Style. All rights reserved.</div>
+      <div class="legal-links">
+        <a href="#">Master Subscription Agreement</a>
+        <a href="#">Service Terms</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">EU Data Act Addendum</a>
+      </div>
+    </div>
+
+    <!-- Background Matrix Accent Grid -->
+    <div class="footer-grid-accent">
+      <!-- Row 1 -->
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube dim"></div>
+      <div class="grid-cube v2"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube dim"></div>
+
+      <!-- Row 2 -->
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube v2"></div>
       display: grid;
       grid-template-columns: 2fr repeat(3, 1fr);
       gap: 40px;
