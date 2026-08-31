@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B SaaS Dark Mode Footer</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0b0c10;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* Footer Container */
+    .saas-footer {
+      background-color: #090a0f;
+      color: #8f94a3;
+      padding: 60px 40px 30px 40px;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Brand/Company Column */
+    .footer-brand .brand-logo {
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      max-width: 280px;
+    }
+
+    /* Navigation Columns */
+    .footer-column h3 {
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 24px;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-column ul li a {
+      color: #8f94a3;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-column ul li a:hover {
+      color: #3b82f6;
+    }
+
+    /* Bottom Legal Bar */
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 60px auto 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      z-index: 2;
+      font-size: 0.8rem;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .legal-links a {
+      color: #646875;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .legal-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Abstract Neon Blue Grid Geometric Accents */
+    .footer-grid-accent {
+      position: absolute;
+      bottom: -40px;
+      right: 5%;
+      display: grid;
+      grid-template-columns: repeat(8, 45px);
+      gap: 12px;
+      opacity: 0.85;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .grid-cube {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.3));
+    }
+
+    /* Staggered variation styling for an irregular layout */
+    .grid-cube.v1 { background: linear-gradient(135deg, #1d4ed8 0%, #60a5fa 100%); }
+    .grid-cube.v2 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+    .grid-cube.dim { opacity: 0.4; }
+    .grid-cube.hidden { visibility: hidden; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .footer-grid-accent {
+        right: -10%;
+        transform: scale(0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Footer Component -->
+  <footer class="saas-footer">
+    
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="brand-logo">pave-style.</div>
+        <p>Real-time compensation platform automation driven by agentic data layers.</p>
+      </div>
+      
+      <div class="footer-column">
+        <h3>Platform</h3>
+        <ul>
+          <li><a href="#">Market Pricing</a></li>
+          <li><a href="#">Team View</a></li>
+          <li><a href="#">Comp Planning</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="#">Plans & Pricing</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">Our purpose</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Legal</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Legal Copyright Info Block -->
+    <div class="footer-bottom">
+      <div>© 2026 Pave-Style. All rights reserved.</div>
+      <div class="legal-links">
+        <a href="#">Master Subscription Agreement</a>
+        <a href="#">Service Terms</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">EU Data Act Addendum</a>
+      </div>
+    </div>
+
+    <!-- Background Matrix Accent Grid -->
+    <div class="footer-grid-accent">
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube dim"></div>
+      <div class="grid-cube v2"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube dim"></div>
+
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube v2"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube dim"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube v2"></div>
+
+      <div class="grid-cube dim"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube v2"></div>
+      <div class="grid-cube v1"></div>
+      <div class="grid-cube"></div>
+      <div class="grid-cube hidden"></div>
+      <div class="grid-cube dim"></div>
+    </div>
+
+  </footer>
+
+</body>
+</html>
